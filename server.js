@@ -1,11 +1,13 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const PORT = 8100
 const mongoose = require('mongoose')
 require('dotenv').config()
 const Nickname = require('./models/nickname')
 
 // Middleware
+app.use(cors())
 app.set('viewengine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({
@@ -90,4 +92,4 @@ app
         })
     })
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+app.listen(process.env.PORT || PORT, () => console.log(`Server is running on port ${PORT}`))
